@@ -5,35 +5,36 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
 var core_1 = require("@angular/core");
+var product_service_1 = require("./product.service");
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(productService) {
+        this.productService = productService;
         this.title = 'Tour of Products';
-        this.heroes = HEROES;
     }
-    AppComponent.prototype.onSelect = function (hero) {
-        this.selectedHero = hero;
+    AppComponent.prototype.onSelect = function (product) {
+        this.selectedProduct = product;
+    };
+    AppComponent.prototype.getProducts = function () {
+        var _this = this;
+        this.productService.getProducts().then(function (products) { return _this.products = products; });
+    };
+    AppComponent.prototype.ngOnInit = function () {
+        this.getProducts();
     };
     return AppComponent;
 }());
 AppComponent = __decorate([
     core_1.Component({
         selector: 'my-app',
-        template: "\n  <h1>{{title}}</h1>\n  <h2>My Products</h2>\n  <ul class=\"heroes\">\n    <li *ngFor=\"let hero of heroes\"\n      [class.selected]=\"hero === selectedHero\"\n      (click)=\"onSelect(hero)\">\n      <span class=\"badge\">{{hero.id}}</span> {{hero.name}}\n    </li>\n  </ul>\n  <hero-detail [hero]=\"selectedHero\"></hero-detail>\n",
-        styles: ["\n.selected {\n  background-color: #CFD8DC !important;\n  color: white;\n}\n.heroes {\n  margin: 0 0 2em 0;\n  list-style-type: none;\n  padding: 0;\n  width: 15em;\n}\n.heroes li {\n  cursor: pointer;\n  position: relative;\n  left: 0;\n  background-color: #EEE;\n  margin: .5em;\n  padding: .3em 0;\n  height: 1.6em;\n  border-radius: 4px;\n}\n.heroes li.selected:hover {\n  background-color: #BBD8DC !important;\n  color: white;\n}\n.heroes li:hover {\n  color: #607D8B;\n  background-color: #DDD;\n  left: .1em;\n}\n.heroes .text {\n  position: relative;\n  top: -3px;\n}\n.heroes .badge {\n  display: inline-block;\n  font-size: small;\n  color: white;\n  padding: 0.8em 0.7em 0 0.7em;\n  background-color: #607D8B;\n  line-height: 1em;\n  position: relative;\n  left: -1px;\n  top: -4px;\n  height: 1.8em;\n  margin-right: .8em;\n  border-radius: 4px 0 0 4px;\n}\n"]
-    })
+        template: "\n  <h1>{{title}}</h1>\n  <h2>My Products</h2>\n  <ul class=\"products\">\n    <li *ngFor=\"let product of products\"\n      [class.selected]=\"product === selectedProduct\"\n      (click)=\"onSelect(product)\">\n      <span class=\"badge\">{{product.id}}</span> {{product.name}}\n    </li>\n  </ul>\n  <product-detail [product]=\"selectedProduct\"></product-detail>\n",
+        styles: ["\n.selected {\n  background-color: #CFD8DC !important;\n  color: white;\n}\n.products {\n  margin: 0 0 2em 0;\n  list-style-type: none;\n  padding: 0;\n  width: 15em;\n}\n.products li {\n  cursor: pointer;\n  position: relative;\n  left: 0;\n  background-color: #EEE;\n  margin: .5em;\n  padding: .3em 0;\n  height: 1.6em;\n  border-radius: 4px;\n}\n.products li.selected:hover {\n  background-color: #BBD8DC !important;\n  color: white;\n}\n.products li:hover {\n  color: #607D8B;\n  background-color: #DDD;\n  left: .1em;\n}\n.products .text {\n  position: relative;\n  top: -3px;\n}\n.products .badge {\n  display: inline-block;\n  font-size: small;\n  color: white;\n  padding: 0.8em 0.7em 0 0.7em;\n  background-color: #607D8B;\n  line-height: 1em;\n  position: relative;\n  left: -1px;\n  top: -4px;\n  height: 1.8em;\n  margin-right: .8em;\n  border-radius: 4px 0 0 4px;\n}\n"],
+        providers: [product_service_1.ProductService]
+    }),
+    __metadata("design:paramtypes", [product_service_1.ProductService])
 ], AppComponent);
 exports.AppComponent = AppComponent;
-var HEROES = [
-    { id: 11, name: 'Samsung 6', description: 'version 6 mobile', price: 323, condition: 'New', category: 'Mobile phone' },
-    { id: 12, name: 'Samsung 7', description: 'Version 7 mobile', price: 375, condition: 'New', category: 'Mobile phone' },
-    { id: 13, name: 'Samsung 8', description: 'version 8 mobile', price: 567, condition: 'New', category: 'Mobile Phone' },
-    { id: 14, name: 'iPhone 7', description: 'Version 7 iphone', price: 233, condition: 'Used', category: 'Mobile Phone' },
-    { id: 15, name: 'Toyota', description: 'toyota car', price: 454, condition: 'New', category: 'Car' },
-    { id: 16, name: 'Bicycle', description: 'Bike', price: 645, condition: 'Like New', category: 'Bike' },
-    { id: 17, name: 'Scooter', description: 'scooter motorbike', price: 458, condition: 'Used', category: 'MotorBike' },
-    { id: 18, name: 'HP', description: 'Expensive laptop', price: 456, condition: 'Mint', category: 'Laptop' },
-    { id: 19, name: 'Dell', description: 'Moderate laptop', price: 345, condition: 'Used', category: 'Laptop' },
-    { id: 20, name: 'Acer', description: 'Average laptop', price: 674, condition: 'New', category: 'Laptop' }
-];
 //# sourceMappingURL=app.component.js.map

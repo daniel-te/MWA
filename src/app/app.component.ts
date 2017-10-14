@@ -1,32 +1,34 @@
-import { Component } from '@angular/core';
-import { Hero } from './hero';
+import { Component, OnInit } from '@angular/core';
+
+import { Product } from './product';
+import { ProductService } from './product.service';
 
 @Component({
   selector: 'my-app',
   template: `
   <h1>{{title}}</h1>
   <h2>My Products</h2>
-  <ul class="heroes">
-    <li *ngFor="let hero of heroes"
-      [class.selected]="hero === selectedHero"
-      (click)="onSelect(hero)">
-      <span class="badge">{{hero.id}}</span> {{hero.name}}
+  <ul class="products">
+    <li *ngFor="let product of products"
+      [class.selected]="product === selectedProduct"
+      (click)="onSelect(product)">
+      <span class="badge">{{product.id}}</span> {{product.name}}
     </li>
   </ul>
-  <hero-detail [hero]="selectedHero"></hero-detail>
+  <product-detail [product]="selectedProduct"></product-detail>
 `,
 styles: [`
 .selected {
   background-color: #CFD8DC !important;
   color: white;
 }
-.heroes {
+.products {
   margin: 0 0 2em 0;
   list-style-type: none;
   padding: 0;
   width: 15em;
 }
-.heroes li {
+.products li {
   cursor: pointer;
   position: relative;
   left: 0;
@@ -36,20 +38,20 @@ styles: [`
   height: 1.6em;
   border-radius: 4px;
 }
-.heroes li.selected:hover {
+.products li.selected:hover {
   background-color: #BBD8DC !important;
   color: white;
 }
-.heroes li:hover {
+.products li:hover {
   color: #607D8B;
   background-color: #DDD;
   left: .1em;
 }
-.heroes .text {
+.products .text {
   position: relative;
   top: -3px;
 }
-.heroes .badge {
+.products .badge {
   display: inline-block;
   font-size: small;
   color: white;
@@ -63,32 +65,30 @@ styles: [`
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }
-`]
+`],
+providers: [ProductService]
 })
 
 export class AppComponent {
   title = 'Tour of Products';
-  selectedHero: Hero;
+  selectedProduct: Product;
+
+  constructor(private productService: ProductService) { }
   
-  heroes = HEROES;
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
+  products: Product[];
+  onSelect(product: Product): void {
+    this.selectedProduct = product;
+  }
+  getProducts(): void {
+    this.productService.getProducts().then(products => this.products = products);
+  }
+  ngOnInit(): void {
+    this.getProducts();
   }
 }
 
 
 
-const HEROES: Hero[] = [
-  { id: 11, name: 'Samsung 6', description: 'version 6 mobile',  price: 323,  condition: 'New',  category: 'Mobile phone' },
-  { id: 12, name: 'Samsung 7' ,description: 'Version 7 mobile',  price: 375,  condition: 'New',  category: 'Mobile phone' },
-  { id: 13, name: 'Samsung 8' ,description: 'version 8 mobile',  price: 567,  condition: 'New',  category: 'Mobile Phone'  },
-  { id: 14, name: 'iPhone 7' ,description: 'Version 7 iphone',  price: 233,  condition: 'Used',  category: 'Mobile Phone'  },
-  { id: 15, name: 'Toyota' ,description: 'toyota car',  price: 454,  condition: 'New',  category: 'Car' },
-  { id: 16, name: 'Bicycle'  ,description: 'Bike',  price: 645,  condition: 'Like New',  category: 'Bike' },
-  { id: 17, name: 'Scooter'  ,description: 'scooter motorbike',  price: 458,  condition: 'Used',  category: 'MotorBike' },
-  { id: 18, name: 'HP'  ,description: 'Expensive laptop',  price: 456,  condition: 'Mint',  category: 'Laptop' },
-  { id: 19, name: 'Dell' ,description: 'Moderate laptop',  price: 345,  condition: 'Used',  category: 'Laptop'  },
-  { id: 20, name: 'Acer' ,description: 'Average laptop',  price: 674,  condition: 'New',  category: 'Laptop'  }
-];
+
 
 
