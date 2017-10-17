@@ -10,6 +10,8 @@ var platform_browser_1 = require("@angular/platform-browser");
 var forms_1 = require("@angular/forms"); // <-- NgModel lives here
 var app_component_1 = require("./app.component");
 var product_detail_component_1 = require("./product-detail.component");
+var cart_module_1 = require("./cart/cart.module");
+var cart_service_1 = require("./cart/cart.service");
 var AppModule = (function () {
     function AppModule() {
     }
@@ -17,11 +19,12 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     core_1.NgModule({
-        imports: [platform_browser_1.BrowserModule,
+        imports: [platform_browser_1.BrowserModule, cart_module_1.CartModule,
             forms_1.FormsModule // <-- import the FormsModule before binding with [(ngModel)]
         ],
         declarations: [app_component_1.AppComponent,
             product_detail_component_1.ProductDetailComponent],
+        providers: [cart_service_1.CartService],
         bootstrap: [app_component_1.AppComponent]
     })
 ], AppModule);

@@ -2,7 +2,7 @@ export class Product {
     id: number;
     name: string;
     description: string;
-    price: Number;
+    price: number;
     condition: string;
     category: String;
   }

@@ -16,6 +16,7 @@ import { ProductService } from './product.service';
     </li>
   </ul>
   <product-detail [product]="selectedProduct"></product-detail>
+  <shopping-cart></shopping-cart>
 `,
 styles: [`
 .selected {
@@ -72,6 +73,7 @@ providers: [ProductService]
 export class AppComponent {
   title = 'Tour of Products';
   selectedProduct: Product;
+  productToAdd: Product;
 
   constructor(private productService: ProductService) { }
   
@@ -81,6 +83,9 @@ export class AppComponent {
   }
   getProducts(): void {
     this.productService.getProducts().then(products => this.products = products);
+  }
+  sendToCart(prod: Product): void {
+    this.productToAdd = prod;
   }
   ngOnInit(): void {
     this.getProducts();
