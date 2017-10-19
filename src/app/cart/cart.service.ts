@@ -25,7 +25,7 @@ export class CartService {
             this.cartProducts[index].qty += 1;
             this.updateItemTotalPrice(index);
         }
-        this.event.emit(this.cartProducts);
+        this.event.emit(this.getList());
     }
     requestEvent() {
         return this.event;
@@ -46,7 +46,7 @@ export class CartService {
             this.cartProducts[index].qty -= 1;
             this.updateItemTotalPrice(index);
         }
-        this.event.emit(this.cartProducts);
+        this.event.emit(this.getList());
     }
 
     getList(): CartItem[] {

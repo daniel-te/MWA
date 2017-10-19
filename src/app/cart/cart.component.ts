@@ -19,6 +19,7 @@ import 'rxjs/add/observable/from';
             <th>Unit Price</th>
             <th>Qty</th>
             <th>Total Price</th>
+            <th>Remove</th>
         </thead>
         <tbody>
             <tr *ngFor="let prod of productList">
@@ -26,6 +27,7 @@ import 'rxjs/add/observable/from';
                 <td>{{ prod.prod.price | pricepipe }}</td>
                 <td>{{ prod.qty }}</td>
                 <td>{{ prod.totalPrice | pricepipe }}</td>
+                <td><i class="glyphicon glyphicon-remove" (click)="removeItem(prod.prod)"><b>X</b></i></td>
             </tr>
         </tbody>
     </table>
@@ -53,13 +55,12 @@ export class CartComponent implements OnInit {
     constructor(private shoppingCart: CartService) {}
 
     ngOnInit() {
-        this.shoppingCart.requestEvent().subscribe( ($event) => {
+        this.shoppingCart.requestEvent().subscribe( ($event:any) => {
             this.loadCart($event);
         });
     }
 
-    loadCart(l) {
-        console.log(l);
+    loadCart(l:any) {
         this.productList = [];
         this.cartTotal = 0;
         this.prodQty = 0;
@@ -68,6 +69,10 @@ export class CartComponent implements OnInit {
             this.prodQty += e.qty;
             this.cartTotal += e.totalPrice;
         });
+    }
+
+    removeItem(prod: Product): void {
+        this.shoppingCart.removeProduct(prod);
     }
 
     toggleViewList() {

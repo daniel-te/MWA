@@ -29,7 +29,7 @@ var CartService = (function () {
             this.cartProducts[index].qty += 1;
             this.updateItemTotalPrice(index);
         }
-        this.event.emit(this.cartProducts);
+        this.event.emit(this.getList());
     };
     CartService.prototype.requestEvent = function () {
         return this.event;
@@ -50,7 +50,7 @@ var CartService = (function () {
             this.cartProducts[index].qty -= 1;
             this.updateItemTotalPrice(index);
         }
-        this.event.emit(this.cartProducts);
+        this.event.emit(this.getList());
     };
     CartService.prototype.getList = function () {
         return this.cartProducts.filter(function (p) { return p.qty > 0; });

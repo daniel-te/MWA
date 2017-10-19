@@ -6,8 +6,10 @@ import { ProductService } from './product.service';
 @Component({
   selector: 'my-app',
   template: `
+  
   <h1>{{title}}</h1>
   <h2>My Products</h2>
+  <div class="prodlist">
   <ul class="products">
     <li *ngFor="let product of products"
       [class.selected]="product === selectedProduct"
@@ -15,6 +17,10 @@ import { ProductService } from './product.service';
       <span class="badge">{{product.id}}</span> {{product.name}}
     </li>
   </ul>
+    <div class="row">
+        <add-product></add-product>
+    </div>
+    </div>
   <product-detail [product]="selectedProduct"></product-detail>
   <shopping-cart></shopping-cart>
 `,
@@ -65,6 +71,9 @@ styles: [`
   height: 1.8em;
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
+}
+.prodlist {
+  float:left;
 }
 `],
 providers: [ProductService]

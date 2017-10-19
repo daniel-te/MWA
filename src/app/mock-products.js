@@ -9,6 +9,5 @@ exports.PRODUCTS = [
     { id: 17, name: 'Scooter', description: 'scooter motorbike', price: 458, condition: 'Used', category: 'MotorBike' },
     { id: 18, name: 'HP', description: 'core i7 HP laptop', price: 456, condition: 'Mint', category: 'Laptop' },
     { id: 19, name: 'Dell', description: 'Core i5 dell laptop', price: 345, condition: 'Used', category: 'Laptop' },
-    { id: 20, name: 'Acer', description: 'Corei3 Acer laptop', price: 674, condition: 'New', category: 'Laptop' }
 ];
 //# sourceMappingURL=mock-products.js.map
